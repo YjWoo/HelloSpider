@@ -26,13 +26,13 @@ class DoubanTopMovie:
             director = tar.select('div.item div.info div.bd p')[0].text.strip().split(' ')[1]
             score = tar.select('div.item div.info div.bd div span.rating_num')[0].text
             image = tar.select('div.item div.pic a img')[0].attrs.get('src')
-            people=tar.select('div.item div.info div.bd div span')[3].text.rsplit('人评价')[0]
+            people = tar.select('div.item div.info div.bd div span')[3].text.rsplit('人评价')[0]
             # 保存图片到本地
             pic = requests.get(image)
             with open('DoubanTopMovie/' + DoubanTopMovie.getName(image), 'wb') as file:
                 file.write(pic.content)
 
-            list.append([rank, name, director, score,people])
+            list.append([rank, name, director, score, people])
             # print(rank, name, director)
         return list
 
@@ -45,7 +45,7 @@ for i in range(10):
 
 # 转多维数组
 str = np.array(str)
-result = pandas.DataFrame(str, columns=['排名', '片名', '导演', '评分','评价人数'])
+result = pandas.DataFrame(str, columns=['排名', '片名', '导演', '评分', '评价人数'])
 writer = pandas.ExcelWriter('DoubanTopMovie.xlsx')
 result.to_excel(writer, 'sheet1')
 writer.save()

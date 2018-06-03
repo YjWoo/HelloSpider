@@ -12,6 +12,7 @@ class DoubanBook:
         res = requests.get(url)
         soup = BeautifulSoup(res.text, 'html.parser')
         for item in soup.select('ul li.store-item'):
+
             nameSelect = item.select('div.title a')
             authorSelect = item.select('span.labeled-text a')
             urlSelect = item.select('div.article-desc-brief a')
